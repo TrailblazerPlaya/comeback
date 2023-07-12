@@ -74,17 +74,40 @@
 ////////////////////////////////////
 
 ////меняем местами ключ и значение/////
-let weatherMap = new Map([
-    ['London', 10],
-    ['Moscow', 4],
-    ['Paris', 42],
-]);
-const newMap = [];
-for (const [key, value] of weatherMap) { 
-     newMap.push([value, key]);//в сола сам догадался
-};    
+// let weatherMap = new Map([
+//     ['London', 10],
+//     ['Moscow', 4],
+//     ['Paris', 42],
+// ]);
+// const newMap = [];
+// for (const [key, value] of weatherMap) { 
+//      newMap.push([value, key]);//в сола сам догадался
+// };    
 
-console.log(newMap);
+// console.log(newMap);
 
-weatherMap = new Map([...weatherMap].map(el => el.reverse()));//ну так да конечно проще, но я не знал
-console.log(weatherMap);
+// weatherMap = new Map([...weatherMap].map(el => el.reverse()));//ну так да конечно проще, но я не знал
+// console.log(weatherMap);
+
+///////////////////////
+
+//WeakMap это когда ключем может быть только объект или массив
+let a = {a: 10};
+const map = new WeakMap();
+map.set(a, 'test');
+console.log(map.get(a));
+console.log(map.has(a));
+console.log(map.delete(a));
+
+
+let cache = new WeakMap();
+
+function getValue(obj) {
+    if(!cache.has(obj)) {
+        const result = 3;
+        cache.set(obj, result);
+    }
+    return cache.get(obj);    
+}
+const result = getValue(a);
+console.log(result);
