@@ -92,22 +92,33 @@
 ///////////////////////
 
 //WeakMap это когда ключем может быть только объект или массив
+// let a = {a: 10};
+// const map = new WeakMap();
+// map.set(a, 'test');
+// console.log(map.get(a));
+// console.log(map.has(a));
+// console.log(map.delete(a));
+
+
+// let cache = new WeakMap();
+
+// function getValue(obj) {
+//     if(!cache.has(obj)) {
+//         const result = 3;
+//         cache.set(obj, result);
+//     }
+//     return cache.get(obj);    
+// }
+// const result = getValue(a);
+// console.log(result);
+
+////////weakSet 
 let a = {a: 10};
-const map = new WeakMap();
-map.set(a, 'test');
-console.log(map.get(a));
-console.log(map.has(a));
-console.log(map.delete(a));
+let b = {b: 20};
+const set = new WeakSet([a, b]);
 
-
-let cache = new WeakMap();
-
-function getValue(obj) {
-    if(!cache.has(obj)) {
-        const result = 3;
-        cache.set(obj, result);
-    }
-    return cache.get(obj);    
-}
-const result = getValue(a);
-console.log(result);
+a = null;
+setTimeout(() => {
+    console.log(set);
+} , 2000)
+console.log(set.has(a));
