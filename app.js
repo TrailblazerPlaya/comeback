@@ -124,9 +124,59 @@
 // console.log(set.has(a));
 
 ///Упражнения на написание рандомайзера
-function getRandomNumber(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
+// function getRandomNumber(min, max) {
+//     return Math.floor(Math.random() * (max - min + 1)) + min;
+//   }
+  
+//   var randomNumber = getRandomNumber(1, 100);
+//   console.log(randomNumber); // Выводит случайное число между 1 и 100, включая 1 и 100
+
+//интернационализация чисел
+
+const options = {
+    style: 'currency',
+    currency: 'RUB'
+};
+const options2 = {
+    style: 'currency',
+    currency: 'USD'
+};
+
+
+console.log(new Intl.NumberFormat('ru-RU', options).format(23000));
+console.log(new Intl.NumberFormat('en-US', options2).format(22210));
+
+
+function convertCurrency(amount, exchangeRate, targetCurrency) {
+    const formatter = new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: targetCurrency,
+    });
+    const convertedAmount = amount * exchangeRate;
+    return formatter.format(convertedAmount);
   }
   
-  var randomNumber = getRandomNumber(1, 100);
-  console.log(randomNumber); // Выводит случайное число между 1 и 100, включая 1 и 100
+  const usdToRubRate = 73.5; // курс обмена доллара на рубль
+  const amountInUSD = 100; // сумма в долларах
+  const convertedAmount = convertCurrency(amountInUSD, usdToRubRate, 'RUB');
+  console.log(convertedAmount); // Выводит эквивалентную сумму в рублях в формате "₽100.00"
+
+
+function convert (sum, initialCurrency, convertCurrency) {
+    const allCurrencies = [
+        { name: 'USD', mult: 1 },
+        { name: 'RUB', mult: 1/60 },
+        { name: 'EUR', mult: 1.1 },
+    ];
+    const initial = allCurrencies.find(c => c.name === initialCurrency);
+    if (!initial) {
+        return null;
+    }
+    const convert = allCurrencies.find(c => c.name === convertCurrency);
+    if(!convert) {
+        return null;
+    }
+    return new Intl.NumberFormat('ru-RU', {style: 'currency', currency: convert .name,}).format(sum * initial.mult / convert.mult);   
+};
+
+console.log(convert(1002, 'USD', 'RUB'));
