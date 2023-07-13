@@ -113,12 +113,20 @@
 // console.log(result);
 
 ////////weakSet 
-let a = {a: 10};
-let b = {b: 20};
-const set = new WeakSet([a, b]);
+// let a = {a: 10};
+// let b = {b: 20};
+// const set = new WeakSet([a, b]);
 
-a = null;
-setTimeout(() => {
-    console.log(set);
-} , 2000)
-console.log(set.has(a));
+// a = null;
+// setTimeout(() => {
+//     console.log(set);
+// } , 2000)
+// console.log(set.has(a));
+
+///Упражнения на написание рандомайзера
+function getRandomNumber(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+  
+  var randomNumber = getRandomNumber(1, 100);
+  console.log(randomNumber); // Выводит случайное число между 1 и 100, включая 1 и 100
