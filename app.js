@@ -133,50 +133,85 @@
 
 //интернационализация чисел
 
-const options = {
-    style: 'currency',
-    currency: 'RUB'
-};
-const options2 = {
-    style: 'currency',
-    currency: 'USD'
-};
+// const options = {
+//     style: 'currency',
+//     currency: 'RUB'
+// };
+// const options2 = {
+//     style: 'currency',
+//     currency: 'USD'
+// };
 
 
-console.log(new Intl.NumberFormat('ru-RU', options).format(23000));
-console.log(new Intl.NumberFormat('en-US', options2).format(22210));
+// console.log(new Intl.NumberFormat('ru-RU', options).format(23000));
+// console.log(new Intl.NumberFormat('en-US', options2).format(22210));
 
 
-function convertCurrency(amount, exchangeRate, targetCurrency) {
-    const formatter = new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: targetCurrency,
-    });
-    const convertedAmount = amount * exchangeRate;
-    return formatter.format(convertedAmount);
-  }
+// function convertCurrency(amount, exchangeRate, targetCurrency) {
+//     const formatter = new Intl.NumberFormat('en-US', {
+//       style: 'currency',
+//       currency: targetCurrency,
+//     });
+//     const convertedAmount = amount * exchangeRate;
+//     return formatter.format(convertedAmount);
+//   }
   
-  const usdToRubRate = 73.5; // курс обмена доллара на рубль
-  const amountInUSD = 100; // сумма в долларах
-  const convertedAmount = convertCurrency(amountInUSD, usdToRubRate, 'RUB');
-  console.log(convertedAmount); // Выводит эквивалентную сумму в рублях в формате "₽100.00"
+//   const usdToRubRate = 73.5; // курс обмена доллара на рубль
+//   const amountInUSD = 100; // сумма в долларах
+//   const convertedAmount = convertCurrency(amountInUSD, usdToRubRate, 'RUB');
+//   console.log(convertedAmount); // Выводит эквивалентную сумму в рублях в формате "₽100.00"
 
 
-function convert (sum, initialCurrency, convertCurrency) {
-    const allCurrencies = [
-        { name: 'USD', mult: 1 },
-        { name: 'RUB', mult: 1/60 },
-        { name: 'EUR', mult: 1.1 },
-    ];
-    const initial = allCurrencies.find(c => c.name === initialCurrency);
-    if (!initial) {
-        return null;
-    }
-    const convert = allCurrencies.find(c => c.name === convertCurrency);
-    if(!convert) {
-        return null;
-    }
-    return new Intl.NumberFormat('ru-RU', {style: 'currency', currency: convert .name,}).format(sum * initial.mult / convert.mult);   
+// function convert (sum, initialCurrency, convertCurrency) {
+//     const allCurrencies = [
+//         { name: 'USD', mult: 1 },
+//         { name: 'RUB', mult: 1/60 },
+//         { name: 'EUR', mult: 1.1 },
+//     ];
+//     const initial = allCurrencies.find(c => c.name === initialCurrency);
+//     if (!initial) {
+//         return null;
+//     }
+//     const convert = allCurrencies.find(c => c.name === convertCurrency);
+//     if(!convert) {
+//         return null;
+//     }
+//     return new Intl.NumberFormat('ru-RU', {style: 'currency', currency: convert .name,}).format(sum * initial.mult / convert.mult);   
+// };
+
+// console.log(convert(1002, 'USD', 'RUB'));
+
+////DATA
+const now1 = new Date(2024, 10, 15);
+const now2 = new Date(2025, 11, 15);
+console.log(Number(now1));
+console.log(Number(now2));
+console.log(now2 - now1);
+
+function getDaysBetweenDates(date1, date2) {
+    return (now2 - now1) / (1000 * 60 * 60 * 24);
 };
 
-console.log(convert(1002, 'USD', 'RUB'));
+console.log(getDaysBetweenDates(now2 - now1));  
+
+
+const first = new Date(2024, 10, 15);
+const second = new Date(2024, 10, 15);
+
+console.log(first < second);
+console.log(first === second);//чтобы это работало нужно использовать конвертацию getTime
+
+console.log(first.getTime() === second.getTime());
+
+
+const user = {
+    name: 'Aleksandr',
+    birthday: '07/14/2023'
+}
+
+function isBirthdayToday(user) {
+    const today = new Date();
+    const birthday = new Date(user.birthday);
+    return (today.getFullYear() === birthday.getFullYear() && today.getMonth() === birthday.getMonth() && today.getDate() === birthday.getDate());
+}
+console.log(isBirthdayToday(user));
