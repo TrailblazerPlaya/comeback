@@ -182,36 +182,94 @@
 // console.log(convert(1002, 'USD', 'RUB'));
 
 ////DATA
-const now1 = new Date(2024, 10, 15);
-const now2 = new Date(2025, 11, 15);
-console.log(Number(now1));
-console.log(Number(now2));
-console.log(now2 - now1);
+// const now1 = new Date(2024, 10, 15);
+// const now2 = new Date(2025, 11, 15);
+// console.log(Number(now1));
+// console.log(Number(now2));
+// console.log(now2 - now1);
 
-function getDaysBetweenDates(date1, date2) {
-    return (now2 - now1) / (1000 * 60 * 60 * 24);
-};
+// function getDaysBetweenDates(date1, date2) {
+//     return (now2 - now1) / (1000 * 60 * 60 * 24);
+// };
 
-console.log(getDaysBetweenDates(now2 - now1));  
-
-
-const first = new Date(2024, 10, 15);
-const second = new Date(2024, 10, 15);
-
-console.log(first < second);
-console.log(first === second);//чтобы это работало нужно использовать конвертацию getTime
-
-console.log(first.getTime() === second.getTime());
+// console.log(getDaysBetweenDates(now2 - now1));  
 
 
-const user = {
-    name: 'Aleksandr',
-    birthday: '07/14/2023'
-}
+// const first = new Date(2024, 10, 15);
+// const second = new Date(2024, 10, 15);
 
-function isBirthdayToday(user) {
-    const today = new Date();
-    const birthday = new Date(user.birthday);
-    return (today.getFullYear() === birthday.getFullYear() && today.getMonth() === birthday.getMonth() && today.getDate() === birthday.getDate());
-}
-console.log(isBirthdayToday(user));
+// console.log(first < second);
+// console.log(first === second);//чтобы это работало нужно использовать конвертацию getTime
+
+// console.log(first.getTime() === second.getTime());
+
+
+// const user = {
+//     name: 'Aleksandr',
+//     birthday: '07/14/2023'
+// }
+
+// function isBirthdayToday(user) {
+//     const today = new Date();
+//     const birthday = new Date(user.birthday);
+//     return (today.getFullYear() === birthday.getFullYear() && today.getMonth() === birthday.getMonth() && today.getDate() === birthday.getDate());
+// }
+// console.log(isBirthdayToday(user));
+
+//Timer готовность пиццы 
+
+// function timerPizza(time) {
+//     let seconds = time * 60; // преобразуем минуты в секунды
+
+//     const interval = setInterval(() => {
+//         seconds--;
+
+//     if (seconds > 0) {  
+//         console.log(`Осталось ${seconds} секунд`);
+//     } else {
+//         console.log('Пицца завершена');
+//         clearInterval(interval);
+//     }
+//  }, 1000); // обновляем каждую секунду             
+// }
+
+// timerPizza(1);//вызов функции в минутах
+
+//есть еще способ с использованием даты и ивент лупов, но там нужно компенсировать лаг ивентлупов добавляя 100мс
+// function pizzaTimer(ms) {
+//     const end = new Date().getTime() + ms;
+//     const interval = setInterval(() => {
+//         console.log(
+//             new Intl.DateTimeFormat('ru-RU', {
+//                 minute: 'numeric',
+//                 second: 'numeric',
+//             }).format(end - new Date().getTime())
+//         );
+//     }, 1000);
+//     setTimeout(() => {
+//         clearInterval(interval);
+//         console.log('Пицца завершена');
+//     }, ms);    
+// }
+
+// pizzaTimer(5000);
+
+
+
+// function pizzaTimer(ms) {
+//     const end = new Date().getTime() + ms;
+//     const interval = setInterval(() => {
+//       console.log(
+//         new Intl.DateTimeFormat('ru-RU', {
+//           minute: 'numeric',
+//           second: 'numeric',
+//         }).format(end - new Date())
+//       );
+//     }, 1000);
+//     setTimeout(() => {
+//       clearInterval(interval);
+//       console.log('Пицца готова!');
+//     }, ms);
+//   }
+  
+//   pizzaTimer(5000);
