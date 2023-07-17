@@ -276,40 +276,71 @@
 
 //ООП 
 
-function Cart() {
-    this.products = [];
+// function Cart() {
+//     this.products = [];
+//   }
+  
+//   Cart.prototype.addProduct = function(product) {
+//     this.products.push(product);
+//   };
+  
+//   Cart.prototype.increaseCount = function(productId, count) {
+//     const product = this.products.find(p => p.id === productId);
+//     if (product) {
+//       product.count += count;
+//     }
+//   };
+  
+//   Cart.prototype.decreaseCount = function(productId, count) {
+//     const productIndex = this.products.findIndex(p => p.id === productId);
+//     if (productIndex !== -1) {
+//       const product = this.products[productIndex];
+//       product.count -= count;
+//       if (product.count <= 0) {
+//         this.products.splice(productIndex, 1);
+//       }
+//     }
+//   };
+  
+//   // Пример использования
+//   const product = { id: 1, name: 'Bread', count: 1 };
+//   const cart = new Cart();
+//   cart.addProduct(product);
+//   console.log(cart); // { products: [{ id: 1, name: 'Bread', count: 1 }] }
+//   cart.increaseCount(1, 2);
+//   console.log(cart); // { products: [{ id: 1, name: 'Bread', count: 3 }] }
+// //   cart.decreaseCount(1, 2);
+// //   console.log(cart); // { products: [{ id: 1, name: 'Bread', count: 1 }] }
+// //   cart.decreaseCount(1, 1);
+//   console.log(cart); // { products: [] }
+
+/////Class
+class User {
+  constructor(login, password) {
+    this.login = login;
+    this.password = this.reverseString(password);
+  } 
+  reverseString(str) {
+    return str.split('').reverse().join('');
   }
   
-  Cart.prototype.addProduct = function(product) {
-    this.products.push(product);
-  };
-  
-  Cart.prototype.increaseCount = function(productId, count) {
-    const product = this.products.find(p => p.id === productId);
-    if (product) {
-      product.count += count;
-    }
-  };
-  
-  Cart.prototype.decreaseCount = function(productId, count) {
-    const productIndex = this.products.findIndex(p => p.id === productId);
-    if (productIndex !== -1) {
-      const product = this.products[productIndex];
-      product.count -= count;
-      if (product.count <= 0) {
-        this.products.splice(productIndex, 1);
-      }
-    }
-  };
-  
-  // Пример использования
-  const product = { id: 1, name: 'Bread', count: 1 };
-  const cart = new Cart();
-  cart.addProduct(product);
-  console.log(cart); // { products: [{ id: 1, name: 'Bread', count: 1 }] }
-  cart.increaseCount(1, 2);
-  console.log(cart); // { products: [{ id: 1, name: 'Bread', count: 3 }] }
-//   cart.decreaseCount(1, 2);
-//   console.log(cart); // { products: [{ id: 1, name: 'Bread', count: 1 }] }
-//   cart.decreaseCount(1, 1);
-  console.log(cart); // { products: [] }
+  changePassword(oldPassword, newPassword) {
+    if (this.comparePassword(oldPassword)) {
+      this.password = this.reverseString(newPassword);
+            console.log('Пароль изменен');
+    } else {
+      console.log('Неверный пароль. not change');
+    } 
+  }
+  comparePassword(password) {
+    return this.password === this.reverseString(password);
+  }      
+}
+
+const user = new User('Aleksandr', '753omaewa');
+console.log(user.login);
+console.log(user.password);
+
+user.changePassword('753omaewa', '234heil');
+console.log(user.password);
+user.changePassword('234he', 'wwww');
