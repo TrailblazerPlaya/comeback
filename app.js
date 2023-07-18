@@ -315,32 +315,75 @@
 //   console.log(cart); // { products: [] }
 
 /////Class
-class User {
-  constructor(login, password) {
-    this.login = login;
-    this.password = this.reverseString(password);
-  } 
-  reverseString(str) {
-    return str.split('').reverse().join('');
-  }
+// class User {
+//   constructor(login, password) {
+//     this.login = login;
+//     this.password = this.reverseString(password);
+//   } 
+//   reverseString(str) {
+//     return str.split('').reverse().join('');
+//   }
   
-  changePassword(oldPassword, newPassword) {
-    if (this.comparePassword(oldPassword)) {
-      this.password = this.reverseString(newPassword);
-            console.log('Пароль изменен');
-    } else {
-      console.log('Неверный пароль. not change');
-    } 
+//   changePassword(oldPassword, newPassword) {
+//     if (this.comparePassword(oldPassword)) {
+//       this.password = this.reverseString(newPassword);
+//             console.log('Пароль изменен');
+//     } else {
+//       console.log('Неверный пароль. not change');
+//     } 
+//   }
+//   comparePassword(password) {
+//     return this.password === this.reverseString(password);
+//   }      
+// }
+
+// const user = new User('Aleksandr', '753omaewa');
+// console.log(user.login);
+// console.log(user.password);
+
+// user.changePassword('753omaewa', '234heil');
+// console.log(user.password);
+// user.changePassword('234he', 'wwww');
+
+//ООП в классах
+class Enemy {
+  constructor(health) {
+      this.health = health;
   }
-  comparePassword(password) {
-    return this.password === this.reverseString(password);
-  }      
+
+  takeDamage(damage) {
+      this.health -= damage;
+      console.log(`Враг получил ${damage} урона. Здоровье врага: ${this.health}`)
+  }
 }
 
-const user = new User('Aleksandr', '753omaewa');
-console.log(user.login);
-console.log(user.password);
+class Sword {
+  constructor(power) {
+    this.power = power;
+  }
 
-user.changePassword('753omaewa', '234heil');
-console.log(user.password);
-user.changePassword('234he', 'wwww');
+  dealDamage() {
+    console.log(`Меч наносит ${this.power} урона.`);
+    return this.power
+  }
+}
+
+
+class Orc extends Enemy {
+  takeDamage(damage) {
+    const chance = Math.random();
+    if (chance <= 0.5) {
+      console.log("Орк улонился от удара!");
+    } else {
+      super.takeDamage(damage);
+    }
+  }
+}
+
+const enemy = new Enemy(100);
+const sword = new Sword(20);
+const orc = new Orc(150);
+
+enemy.takeDamage(sword.dealDamage());
+orc.takeDamage(sword.dealDamage());
+orc.takeDamage(sword.dealDamage());
