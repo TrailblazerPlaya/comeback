@@ -346,44 +346,66 @@
 // user.changePassword('234he', 'wwww');
 
 //ООП в классах
-class Enemy {
-  constructor(health) {
-      this.health = health;
-  }
+// class Enemy {
+//   constructor(health) {
+//       this.health = health;
+//   }
 
-  takeDamage(damage) {
-      this.health -= damage;
-      console.log(`Враг получил ${damage} урона. Здоровье врага: ${this.health}`)
-  }
-}
+//   takeDamage(damage) {
+//       this.health -= damage;
+//       console.log(`Враг получил ${damage} урона. Здоровье врага: ${this.health}`)
+//   }
+// }
 
-class Sword {
-  constructor(power) {
-    this.power = power;
-  }
+// class Sword {
+//   constructor(power) {
+//     this.power = power;
+//   }
 
-  dealDamage() {
-    console.log(`Меч наносит ${this.power} урона.`);
-    return this.power
-  }
-}
+//   dealDamage() {
+//     console.log(`Меч наносит ${this.power} урона.`);
+//     return this.power
+//   }
+// }
 
 
-class Orc extends Enemy {
-  takeDamage(damage) {
-    const chance = Math.random();
-    if (chance <= 0.5) {
-      console.log("Орк улонился от удара!");
-    } else {
-      super.takeDamage(damage);
-    }
-  }
-}
+// class Orc extends Enemy {
+//   takeDamage(damage) {
+//     const chance = Math.random();
+//     if (chance <= 0.5) {
+//       console.log("Орк улонился от удара!");
+//     } else {
+//       super.takeDamage(damage);
+//     }
+//   }
+// }
 
-const enemy = new Enemy(100);
-const sword = new Sword(20);
-const orc = new Orc(150);
+// const enemy = new Enemy(100);
+// const sword = new Sword(20);
+// const orc = new Orc(150);
 
-enemy.takeDamage(sword.dealDamage());
-orc.takeDamage(sword.dealDamage());
-orc.takeDamage(sword.dealDamage());
+// enemy.takeDamage(sword.dealDamage());
+// orc.takeDamage(sword.dealDamage());
+// orc.takeDamage(sword.dealDamage());
+
+///запросы на сервер 
+fetch("http://dummyjson.com/products")
+  .then(response => response.json())
+  .then(data => {
+    const prices = data.products.slice(0, 30).map(product => product.price);
+    const averagePrice = prices.reduce((acc, curr) => acc + curr, 0) / prices.length;
+    console.log("Средняя цена:" + averagePrice);
+  })
+  .catch(error => {
+    console.error("Ошибка при выполнении запроса:", error);
+  });
+
+  // const request = new XMLHttpRequest();
+  // request.open("GET", "http://dummyjson.com/products");
+  // request.send();
+
+  // request.addEventListener("load", function() {
+  //   const data = JSON.parse(this.responseText);
+  //   console.log(data);
+  // });
+
