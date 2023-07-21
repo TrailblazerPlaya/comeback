@@ -389,16 +389,16 @@
 // orc.takeDamage(sword.dealDamage());
 
 ///запросы на сервер 
-fetch("http://dummyjson.com/products")
-  .then(response => response.json())
-  .then(data => {
-    const prices = data.products.slice(0, 30).map(product => product.price);
-    const averagePrice = prices.reduce((acc, curr) => acc + curr, 0) / prices.length;
-    console.log("Средняя цена:" + averagePrice);
-  })
-  .catch(error => {
-    console.error("Ошибка при выполнении запроса:", error);
-  });
+// fetch("http://dummyjson.com/products")
+//   .then(response => response.json())
+//   .then(data => {
+//     const prices = data.products.slice(0, 30).map(product => product.price);
+//     const averagePrice = prices.reduce((acc, curr) => acc + curr, 0) / prices.length;
+//     console.log("Средняя цена:" + averagePrice);
+//   })
+//   .catch(error => {
+//     console.error("Ошибка при выполнении запроса:", error);
+//   });
 
   // const request = new XMLHttpRequest();
   // request.open("GET", "http://dummyjson.com/products");
@@ -409,3 +409,30 @@ fetch("http://dummyjson.com/products")
   //   console.log(data);
   // });
 
+//promise
+fetch("http://dummyjson.com/products/categories")
+  .then(response => {
+    if (response.ok) {
+      return response.json();
+  } else {
+    throw new Error('error');
+  }
+})
+.then(categories => {
+  //создаем элемент <select>
+  const select = document.createElement('select');
+
+  //добавляем опции в элемент <select>
+  categories.forEach(category => {
+    const option = document.createElement('option');
+    option.value = category;
+    option.text = category;
+    select.appendChild(option);
+  });
+  //добавляем элемент <select> в body
+  document.body.appendChild(select);
+
+})
+.catch(error => {
+  console.log(error);
+});
