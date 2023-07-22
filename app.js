@@ -410,29 +410,58 @@
   // });
 
 //promise
-fetch("http://dummyjson.com/products/categories")
-  .then(response => {
-    if (response.ok) {
-      return response.json();
-  } else {
-    throw new Error('error');
-  }
-})
-.then(categories => {
-  //создаем элемент <select>
-  const select = document.createElement('select');
+// fetch("http://dummyjson.com/products/categories")
+//   .then(response => {
+//     if (response.ok) {
+//       return response.json();
+//   } else {
+//     throw new Error('error');
+//   }
+// })
+// .then(categories => {
+//   //создаем элемент <select>
+//   const select = document.createElement('select');
 
-  //добавляем опции в элемент <select>
-  categories.forEach(category => {
-    const option = document.createElement('option');
-    option.value = category;
-    option.text = category;
-    select.appendChild(option);
-  });
-  //добавляем элемент <select> в body
-  document.body.appendChild(select);
+//   //добавляем опции в элемент <select>
+//   categories.forEach(category => {
+//     const option = document.createElement('option');
+//     option.value = category;
+//     option.text = category;
+//     select.appendChild(option);
+//   });
+//   //добавляем элемент <select> в body
+//   document.body.appendChild(select);
 
-})
-.catch(error => {
-  console.log(error);
-});
+// })
+// .catch(error => {
+//   console.log(error);
+// });
+
+//event loop
+function myFetch(url) {
+  return new Promise((resolve, reject) => {
+    const request = new XMLHttpRequest();
+    request.open('GET', url);
+    request.send();
+
+    request.addEventListener('load', function() {
+          if(this.status > 400) {
+            reject(new Error(this.status));
+          };
+          resolve(this.responseText);
+    });
+
+    request.addEventListener('error', () => {
+          reject(new Error(this.status));
+    });
+
+    request.addEventListener('timeout', () => {
+      reject(new Error('timeout'));
+    });  
+  })
+}
+
+myFetch('http://dummyjson.com/products')
+.then(data => console.log(data))
+.catch(error => console.log(error));
+
