@@ -438,30 +438,72 @@
 // });
 
 //event loop
-function myFetch(url) {
-  return new Promise((resolve, reject) => {
-    const request = new XMLHttpRequest();
-    request.open('GET', url);
-    request.send();
+// function myFetch(url) {
+//   return new Promise((resolve, reject) => {
+//     const request = new XMLHttpRequest();
+//     request.open('GET', url);
+//     request.send();
 
-    request.addEventListener('load', function() {
-          if(this.status > 400) {
-            reject(new Error(this.status));
-          };
-          resolve(this.responseText);
-    });
+//     request.addEventListener('load', function() {
+//           if(this.status > 400) {
+//             reject(new Error(this.status));
+//           };
+//           resolve(this.responseText);
+//     });
 
-    request.addEventListener('error', () => {
-          reject(new Error(this.status));
-    });
+//     request.addEventListener('error', () => {
+//           reject(new Error(this.status));
+//     });
 
-    request.addEventListener('timeout', () => {
-      reject(new Error('timeout'));
-    });  
-  })
+//     request.addEventListener('timeout', () => {
+//       reject(new Error('timeout'));
+//     });  
+//   })
+// }
+
+// myFetch('http://dummyjson.com/products')
+// .then(data => console.log(data))
+// .catch(error => console.log(error));
+
+//async/await
+// async function getCityFromCoordinates() {
+//   try {
+//     const position = await new Promise((resolve, reject) => {
+//       navigator.geolocation.getCurrentPosition(resolve, reject);
+//     });
+
+//     const latitude = position.coords.latitude;
+//     const longitude = position.coords.longitude;
+
+//     const url = `http://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}`;
+//     const response = await fetch(url);
+//     const data = await response.json();
+
+//     const city = data.city;
+//     console.log("City:", city);
+//   } catch (error) {
+//     console.log("Error:", error);
+//   }
+// }
+// getCityFromCoordinates();
+
+
+
+/////////////////
+async function fetchActivity() {
+  try {
+    const resoinse = await fetch('https://www.boredapi.com/api/activity');
+    const data = await resoinse.json();
+    const activity = data.activity;
+
+    const activityElement = document.createElement('p');
+    activityElement.textContent = activity;
+    activityElement.className = 'activity';
+
+    document.body.appendChild(activityElement);
+  } catch (error) {
+    console.log(error);
+  }
 }
 
-myFetch('http://dummyjson.com/products')
-.then(data => console.log(data))
-.catch(error => console.log(error));
-
+fetchActivity();
