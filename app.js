@@ -490,20 +490,55 @@
 
 
 /////////////////
-async function fetchActivity() {
-  try {
-    const resoinse = await fetch('https://www.boredapi.com/api/activity');
-    const data = await resoinse.json();
-    const activity = data.activity;
+// async function fetchActivity() {
+//   try {
+//     const resoinse = await fetch('https://www.boredapi.com/api/activity');
+//     const data = await resoinse.json();
+//     const activity = data.activity;
 
-    const activityElement = document.createElement('p');
-    activityElement.textContent = activity;
-    activityElement.className = 'activity';
+//     const activityElement = document.createElement('p');
+//     activityElement.textContent = activity;
+//     activityElement.className = 'activity';
 
-    document.body.appendChild(activityElement);
-  } catch (error) {
-    console.log(error);
+//     document.body.appendChild(activityElement);
+//   } catch (error) {
+//     console.log(error);
+//   }
+// }
+
+// fetchActivity();
+
+
+//DOMElements
+function createElement(N) {
+  const container = document.getElementById('container');
+
+  for (let i = 0; i < N; i++) {
+    const element = document.createElement('div');
+    element.textContent = `Элемент ${i + 1}: Пример текста`;
+    container.appendChild(element);
   }
+
+
+  const searchInput = document.createElement('input');
+  searchInput.type = 'text';
+  searchInput.placeholder = 'Введите текст';
+  container.appendChild(searchInput);
+
+  searchInput.addEventListener('input', function(event) {
+    const searchText = event.target.value.toLowerCase();
+    const elements = container.getElementsByTagName('div');
+
+    for (let i = 0; i < elements.length; i++) {
+      const elementText = elements[i].textContent.toLowerCase();
+      
+      if (elementText.includes(searchText)) {
+        elements[i].style.backgroundColor = 'yellow';
+      } else {
+        elements[i].style.backgroundColor = 'initial';
+      }
+    }  
+  });
 }
 
-fetchActivity();
+createElement(10);
